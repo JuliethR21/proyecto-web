@@ -1,9 +1,8 @@
 <?php
-
-include("../config/database.php");
-
-$usuarios = $conn->query("SELECT * FROM users");
-
+require_once __DIR__ . "/../../config/database.php";
+$stmt = $conn->prepare("SELECT * FROM users");
+$stmt->execute();
+$usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +19,8 @@ $usuarios = $conn->query("SELECT * FROM users");
 
     <header>
         <h1>Usuarios Registrados</h1>
-        <a
-            class="btn"
-            href="/proyecto-web/public/index.php?page=nuevo">
+
+        <a class="btn" href="<?= BASE_URL ?>index.php?page=nuevo">
             Nuevo Usuario
         </a>
     </header>
@@ -32,19 +30,19 @@ $usuarios = $conn->query("SELECT * FROM users");
         <ul>
 
             <li>
-                <a href="/proyecto-web/public/index.php">
+                <a href="<?= BASE_URL ?>index.php">
                     Inicio
                 </a>
             </li>
 
             <li>
-                <a href="/proyecto-web/public/index.php?page=dashboard">
+                <a href="<?= BASE_URL ?>index.php?page=dashboard">
                     Dashboard
                 </a>
             </li>
 
             <li>
-                <a href="/proyecto-web/public/logout.php">
+                <a href="<?= BASE_URL ?>logout.php">
                     Cerrar sesión
                 </a>
             </li>
@@ -75,18 +73,17 @@ $usuarios = $conn->query("SELECT * FROM users");
                         <td><?= htmlspecialchars($usuario['name']) ?></td>
 
                         <td><?= htmlspecialchars($usuario['email']) ?></td>
+
                         <td>
 
-                            <a
-                                class="btn"
-                                href="/proyecto-web/public/index.php?page=editarUsuario&id=<?= $usuario['id'] ?>">
+                            <a class="btn"
+                               href="<?= BASE_URL ?>index.php?page=editarUsuario&id=<?= $usuario['id'] ?>">
                                 Editar
                             </a>
 
-                            <a
-                                class="btn btn-delete"
-                                href="/proyecto-web/router.php?page=eliminarUsuario&id=<?= $usuario['id'] ?>"
-                                onclick="return confirm('¿Eliminar usuario?')">
+                            <a class="btn btn-delete"
+                               href="<?= BASE_URL ?>index.php?page=eliminarUsuario&id=<?= $usuario['id'] ?>"
+                               onclick="return confirm('¿Eliminar usuario?')">
                                 Eliminar
                             </a>
 

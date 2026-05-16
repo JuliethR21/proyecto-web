@@ -1,10 +1,6 @@
-<?php
-
-if (!isset($_SESSION['user'])) {
-    header("Location: /proyecto-web/public/index.php?page=login");
-    exit;
+<?php if (!defined('BASE_URL')) {
+    define("BASE_URL", "/");
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -28,23 +24,25 @@ if (!isset($_SESSION['user'])) {
         <ul>
 
             <li>
-                <a href="/proyecto-web/public/index.php">
+                <a href="<?= BASE_URL ?>index.php">
                     Inicio
                 </a>
             </li>
 
             <li>
-                <a href="/proyecto-web/public/index.php?page=usuarios">
+                <a href="<?= BASE_URL ?>index.php?page=usuarios">
                     Usuarios
                 </a>
             </li>
 
             <li>
-                <a href="/proyecto-web/public/logout.php">
+                <a href="<?= BASE_URL ?>logout.php">
                     Cerrar sesión
                 </a>
             </li>
+
         </ul>
+
     </nav>
 
     <main>

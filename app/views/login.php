@@ -17,7 +17,7 @@
     <nav>
         <ul>
             <li>
-                <a href="/proyecto-web/public/index.php">
+                <a href="index.php">
                     Inicio
                 </a>
             </li>
@@ -26,19 +26,11 @@
 
     <main>
 
-        <form action="../router.php?page=auth" method="POST">
+        <form action="index.php?page=auth" method="POST">
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Correo"
-                required>
+            <input type="email" name="email" placeholder="Correo" required>
 
-            <input
-                type="password"
-                name="password"
-                placeholder="Contraseña"
-                required>
+            <input type="password" name="password" placeholder="Contraseña" required>
 
             <button type="submit">
                 Ingresar
@@ -47,7 +39,7 @@
             <?php if (isset($_GET['error'])): ?>
 
                 <div class="alert">
-                    Usuario o contraseñas incorrectas
+                    Usuario o contraseña incorrectos
                 </div>
 
             <?php endif; ?>
@@ -55,6 +47,7 @@
         </form>
 
     </main>
+
     <script>
         setTimeout(() => {
             const alert = document.querySelector('.alert');

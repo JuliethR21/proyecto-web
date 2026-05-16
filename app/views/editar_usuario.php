@@ -1,8 +1,12 @@
 <?php
 
-require("../config/database.php");
+require_once __DIR__ . "/../../config/database.php";
 
-$id = $_GET['id'];
+$id = $_GET['id'] ?? null;
+
+if (!$id) {
+    die("ID no válido");
+}
 
 $stmt = $conn->prepare(
     "SELECT * FROM users WHERE id=?"
@@ -35,28 +39,19 @@ $usuario = $stmt->fetch();
 
     <main>
 
-        <form
-            action="../router.php?page=actualizarUsuario"
-            method="POST">
+        <form action="index.php?page=actualizarUsuario" method="POST">
 
-            <input
-                type="hidden"
-                name="id"
-                value="<?= $usuario['id'] ?>">
+            <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
 
-            <input
-                type="text"
-                name="name"
+            <input type="text" name="name"
                 value="<?= htmlspecialchars($usuario['name']) ?>"
                 required>
 
-            <input
-                type="email"
-                name="email"
+            <input type="email" name="email"
                 value="<?= htmlspecialchars($usuario['email']) ?>"
                 required>
-            <input
-                type="password"
+
+            <input type="password"
                 name="password"
                 placeholder="Nueva contraseña (opcional)">
 

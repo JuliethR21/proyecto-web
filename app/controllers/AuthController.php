@@ -2,10 +2,8 @@
 
 class AuthController
 {
-
     public function login($email, $password)
     {
-
         require_once(__DIR__ . "/../../config/database.php");
 
         $query = $conn->prepare(
@@ -23,11 +21,13 @@ class AuthController
             $_SESSION['user'] = $user['id'];
             $_SESSION['name'] = $user['name'];
 
-            header("Location: /proyecto-web/public/index.php?page=dashboard");
+            header("Location: index.php?page=dashboard");
+            exit;
+
         } else {
-            header(
-                "Location: /proyecto-web/public/index.php?page=login&error=1"
-            );
+
+            header("Location: index.php?page=login&error=1");
+            exit;
         }
     }
 }

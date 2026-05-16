@@ -2,10 +2,8 @@
 
 class UserController
 {
-
     public function create($data)
     {
-
         require(__DIR__ . "/../../config/database.php");
 
         $stmt = $conn->prepare(
@@ -14,73 +12,55 @@ class UserController
         );
 
         $stmt->execute([
-
             htmlspecialchars($data['name']),
             htmlspecialchars($data['email']),
-
-            password_hash(
-                $data['password'],
-                PASSWORD_DEFAULT
-            )
-
+            password_hash($data['password'], PASSWORD_DEFAULT)
         ]);
 
-        header(
-            "Location: /proyecto-web/public/index.php?page=usuarios"
-        );
+        header("Location: index.php?page=usuarios");
+        exit;
     }
 
     public function update($data)
     {
-
         require(__DIR__ . "/../../config/database.php");
 
         if (!empty($data['password'])) {
 
             $stmt = $conn->prepare(
                 "UPDATE users
-             SET name=?, email=?, password=?
-             WHERE id=?"
+                 SET name=?, email=?, password=?
+                 WHERE id=?"
             );
 
             $stmt->execute([
-
                 htmlspecialchars($data['name']),
                 htmlspecialchars($data['email']),
-
-                password_hash(
-                    $data['password'],
-                    PASSWORD_DEFAULT
-                ),
-
+                password_hash($data['password'], PASSWORD_DEFAULT),
                 $data['id']
-
             ]);
+
         } else {
 
             $stmt = $conn->prepare(
                 "UPDATE users
-             SET name=?, email=?
-             WHERE id=?"
+                 SET name=?, email=?
+                 WHERE id=?"
             );
 
             $stmt->execute([
-
                 htmlspecialchars($data['name']),
                 htmlspecialchars($data['email']),
                 $data['id']
-
             ]);
         }
 
-        header(
-            "Location: /proyecto-web/public/index.php?page=usuarios"
-        );
+        header("Location: index.php?page=usuarios");
+        exit;
     }
 
     public function delete($id)
     {
-
         require(__DIR__ . "/../../config/database.php");
 
         $stmt = $conn->prepare(
@@ -89,8 +69,7 @@ class UserController
 
         $stmt->execute([$id]);
 
-        header(
-            "Location: /proyecto-web/public/index.php?page=usuarios"
-        );
+        header("Location: index.php?page=usuarios");
+        exit;
     }
 }

@@ -17,7 +17,7 @@
     <nav>
         <ul>
             <li>
-                <a href="/proyecto-web/public/index.php?page=login">
+                <a href="index.php?page=login">
                     Login
                 </a>
             </li>
